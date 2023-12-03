@@ -3,19 +3,9 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
   test:
-    name: Test on node ${{ matrix.node_version }} and ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        node_version: ['16', '18']
-        os: [ubuntu-latest, macOS-latest]
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node_version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node_version }}
-
-    - name: npm install, build and test
-      run: docker-compose up -d
+      - uses: actions/checkout@v2
+      - name: Build the stack
+        run: docker-compose up -d
         
